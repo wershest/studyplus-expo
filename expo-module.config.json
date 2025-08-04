@@ -1,0 +1,9 @@
+{
+  "platforms": ["apple", "android", "web"],
+  "apple": {
+    "modules": ["StudyplusExpoModule"]
+  },
+  "android": {
+    "modules": ["expo.modules.studyplusexpo.StudyplusExpoModule"]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "paths": {
+      "studyplus-expo": ["../src/index"],
+      "studyplus-expo/*": ["../src/*"]
+    }
+  }
+}
