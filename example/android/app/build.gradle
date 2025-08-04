@@ -88,13 +88,6 @@ android {
     compileSdk rootProject.ext.compileSdkVersion
 
     namespace 'expo.modules.studyplusexpo.example'
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-        coreLibraryDesugaringEnabled true
-    }
-
     defaultConfig {
         applicationId 'expo.modules.studyplusexpo.example'
         minSdkVersion rootProject.ext.minSdkVersion
@@ -102,6 +95,12 @@ android {
         versionCode 1
         versionName "1.0.0"
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+        coreLibraryDesugaringEnabled true
+    }
+
     signingConfigs {
         debug {
             storeFile file('debug.keystore')
@@ -183,5 +182,4 @@ dependencies {
     } else {
         implementation jscFlavor
     }
-
 }
