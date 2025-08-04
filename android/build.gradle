@@ -41,3 +41,11 @@ android {
     abortOnError false
   }
 }
+
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {    
+    implementation 'com.github.studyplus:Studyplus-Android-SDK:4.0.2'
+}
