@@ -1,23 +1,21 @@
-import * as StudyplusExpo from "studyplus-expo";
+import StudyplusExpo from "studyplus-expo";
 import { Button, SafeAreaView, ScrollView, Text, View } from "react-native";
 import { useEffect, useState } from "react";
 
 export default function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [authMessage, setAuthMessage] = useState("");
-  const [postMessage, setPostMessage] = useState("");
+  const [msg, setMsg] = useState("");
 
   useEffect(() => {
     StudyplusExpo.setup(
-      "ZeXtSFrcyEKxNU2wu9ZLR4qFMc5UY7TX",
-      "Kcgt4rE5dm4Yg4K4tFHN5jcdABJ75Yfm3GXXSXvZTDX7J9dRVLCkPpzLM624Bs4T"
+      "U7xO5VA4FgNKSGGOCfAd3gNvHtnfOhBd",
+      "xRBSnBeTXmqbYrHxFe5GGxuW9RUUTeJuYTwvnLgKrkcXR6Z8XXf3O4PrbnFV3Dre"
     );
   }, []);
 
   const checkAuthentication = async () => {
     try {
       const authenticated = await StudyplusExpo.isAuthenticated();
-      setIsAuthenticated(authenticated);
       if (authenticated) {
         setAuthMessage("You are authenticated.");
       } else {
@@ -25,7 +23,7 @@ export default function App() {
       }
     } catch (error) {
       console.error("Error checking authentication:", error);
-      setAuthMessage("Error checking authentication.");
+      setMsg("Error checking authentication.");
     }
   };
 
@@ -42,27 +40,32 @@ export default function App() {
   const postStudyRecord = async () => {
     try {
       await StudyplusExpo.postStudyRecord(10, 20, "Hello from JS!");
+      setMsg(
+        `Study record posted successfully.\nDuration: 10 minutes\nAmount: 20 points\nComment: Hello from JS!`
+      );
     } catch (error) {
       console.error("Error posting study record:", error);
-      setPostMessage("Failed to post study record.");
+      setMsg("Failed to post study record.");
     }
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.container}>
-        <Text style={styles.header}>Module API Example</Text>
-        <Group name="Constants">
+        <View style={{ height: 40 }} />
+        <Text style={styles.header}>StudyPlus Example</Text>
+        <Group name="Check Authentication">
+          <Button title="Check" onPress={checkAuthentication} />
           <Text>{authMessage}</Text>
         </Group>
-        <Group name="checkAuthentication">
-          <Button title="Start Authentication" onPress={checkAuthentication} />
+        <Group name="Start Authentication">
+          <Button title="Start" onPress={startAuth} />
         </Group>
-        <Group name="startAuth">
-          <Button title="Start Authentication" onPress={startAuth} />
+        <Group name="Post Study Record">
+          <Button title="Post" onPress={postStudyRecord} />
         </Group>
-        <Group name="postStudyRecord">
-          <Button title="postStudyRecord" onPress={postStudyRecord} />
+        <Group name="Message">
+          <Text>{msg}</Text>
         </Group>
       </ScrollView>
     </SafeAreaView>

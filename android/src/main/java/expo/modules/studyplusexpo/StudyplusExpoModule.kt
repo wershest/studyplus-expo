@@ -17,19 +17,13 @@ import expo.modules.kotlin.events.EventEmitter
 
 class StudyplusExpoModule : Module() {
   private val REQUEST_CODE_AUTH = 112
-  private lateinit var context: Context
   private var studyplus: Studyplus? = null
   private var authPromise: Promise? = null
-
-  private val currentActivity
-      get() = appContext.currentActivity ?: throw Exceptions.MissingActivity()
-
+  
   override fun definition() = ModuleDefinition {
     Name("StudyplusExpoModule")
 
-    OnCreate {
-      context = appContext.reactContext ?: throw Exceptions.ReactContextLost()
-    }
+    OnCreate {}
 
     OnActivityResult { _, (requestCode, resultCode, data) ->
       handleActivityResult(requestCode, resultCode, data)
@@ -58,11 +52,8 @@ class StudyplusExpoModule : Module() {
         }
       }
     }
-
-    Function("cancelAuth") {
-      studyplus?.cancelAuth()
-    }
-
+    
+    // (promise:Promise) is a special last parameter injected by Expo to let you handle async results.
     AsyncFunction("postStudyRecord") { duration: Int, amount: Int, comment: String, promise: Promise ->
       val record = StudyRecord(
         duration = duration,

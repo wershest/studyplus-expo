@@ -1,20 +1,22 @@
 // Reexport the native module. On web, it will be resolved to StudyplusExpoModule.web.ts
 // and on native platforms to StudyplusExpoModule.ts
-import StudyplusExpo from "./StudyplusExpoModule";
+import StudyplusExpoModule from "./StudyplusExpoModule";
 
-export function setup(consumerKey: string, consumerSecret: string) {
-  StudyplusExpo.setup(consumerKey, consumerSecret);
-}
-export function isAuthenticated(): Promise<boolean> {
-  return StudyplusExpo.isAuthenticated();
-}
-export function startAuth(): Promise<string> {
-  return StudyplusExpo.startAuth();
-}
-export function postStudyRecord(
-  duration: number,
-  amount: number,
-  comment: string
-): Promise<string> {
-  return StudyplusExpo.postStudyRecord(duration, amount, comment);
+export default class StudyplusExpo {
+  static setup(consumerKey: string, consumerSecret: string) {
+    StudyplusExpoModule.setup(consumerKey, consumerSecret);
+  }
+  static isAuthenticated(): Promise<boolean> {
+    return StudyplusExpoModule.isAuthenticated();
+  }
+  static startAuth(): Promise<string> {
+    return StudyplusExpoModule.startAuth();
+  }
+  static postStudyRecord(
+    duration: number,
+    amount: number,
+    comment: string
+  ): Promise<string> {
+    return StudyplusExpoModule.postStudyRecord(duration, amount, comment);
+  }
 }
